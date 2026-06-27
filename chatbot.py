@@ -5,6 +5,8 @@ from functions import (
     is_greeting, is_farewell, contains_question, detect_topic,
     is_weather_query, is_time_query, is_date_query,
     is_joke_query, is_calculator_query, is_riddle_query,
+    is_curiosity_query, is_advice_query, is_motivation_query,
+    is_coin_query, is_dice_query,
     contains_number, detect_city,
     split_conversation, count_words, count_tokens,
     save_history, load_history
@@ -162,6 +164,71 @@ def calculate(expr: str):
         return None
 
 
+def get_curiosity():
+    datos = [
+        "Los pulpos tienen tres corazones y sangre azul.",
+        "Las hormigas nunca duermen. Literalmente.",
+        "El ojo humano puede distinguir hasta 10 millones de colores.",
+        "Banana no es la unica fruta que tiene pepitas. Todas las frutas las tienen.",
+        "El corazón de un camarón esta en la cabeza.",
+        "Los arboles se comunican entre si a traves de sus raices usando una red de hongos llamada 'wood wide web'.",
+        "El 90% de los datos del mundo se generaron en los ultimos dos años.",
+        "Un grupo de flamencos se llama 'flamenco', igual que el ave en singular.",
+        "El primer programador de la historia fue una mujer: Ada Lovelace.",
+        "El wifi fue inventado por accidente mientras buscaban algo completamente diferente.",
+        "Python no se llama por la serpiente, sino por el grupo comico Monty Python.",
+        "El aguacate es una fruta, no una verdura.",
+        "La miel nunca se echa a perder. Se encontró miel comestible en tumbas egipcias de 3000 años.",
+        "Los dinosaurios aun existen: son las aves.",
+        "El nombre mas comun en el mundo es Mohammed.",
+    ]
+    return random.choice(datos)
+
+
+def get_advice():
+    consejos = [
+        "Aprende a decir 'no' sin sentirte mal. Tu tiempo vale.",
+        "Lee al menos 10 páginas al día. En un año son 10 libros.",
+        "Si algo te toma menos de 2 minutos, hazlo ahora.",
+        "No compares tu progreso con el de otros. Cada quien va a su ritmo.",
+        "Duerme bien. No hay productividad que valga la pena sin descanso.",
+        "Guarda plata aunque sea poquito. El habito es lo que importa.",
+        "No le temas a equivocarte. Los errores son la forma mas rapida de aprender.",
+        "Si no sabes algo, preguntalo. La unica pregunta tonta es la que no se hace.",
+        "Aprende a cocinar al menos 3 platos. Te va a salvar la vida.",
+        "Camina 15 minutos al dia. Hace mas de lo que crees.",
+        "Organiza tu tiempo. La mayoria de la gente pierde 2 horas al dia sin darse cuenta.",
+        "No respondas cuando estes enojado. Espera 5 minutos.",
+    ]
+    return random.choice(consejos)
+
+
+def get_motivation():
+    frases = [
+        "No se trata de ser el mejor, sino de ser mejor que ayer.",
+        "El exito es la suma de pequeños esfuerzos repetidos dia tras dia.",
+        "No esperes a estar listo, empieza y ve aprendiendo en el camino.",
+        "Si puedes soñarlo, puedes hacerlo. Pero tienes que empezar.",
+        "El unico fracaso real es no intentarlo.",
+        "Tu unico limite es tu mente. Todo lo demas es excusa.",
+        "La disciplina vence a la motivación. Hazlo aunque no tengas ganas.",
+        "Cada día es una nueva oportunidad. No importa lo que paso ayer.",
+        "No subestimes el poder de avanzar un poco cada dia.",
+        "Las grandes cosas nunca vienen de zonas de confort.",
+        "El momento perfecto no existe. El mejor momento es ahora.",
+        "Si nada cambia, nada cambia. Tu tienes el poder de empezar.",
+    ]
+    return random.choice(frases)
+
+
+def flip_coin():
+    return random.choice(["Cara", "Cruz"])
+
+
+def roll_dice():
+    return random.randint(1, 6)
+
+
 def get_riddle():
     items = [
         ("Blanco por dentro, verde por fuera. Si quieres que te lo diga, espera. ¿Que soy?", "La pera", "pera"),
@@ -226,6 +293,24 @@ def get_local_response(user_input: str, riddle_state: dict = None):
     if is_joke_query(user_input):
         return get_joke()
 
+    if is_curiosity_query(user_input):
+        return f"Sabias que... {get_curiosity()}"
+
+    if is_advice_query(user_input):
+        return f"Un consejo: {get_advice()}"
+
+    if is_motivation_query(user_input):
+        return get_motivation()
+
+    if is_coin_query(user_input):
+        return f"Salio: {flip_coin()}"
+
+    if is_dice_query(user_input):
+        return f"El dado cayo en: {roll_dice()}"
+
+    if "numero de la suerte" in user_input or "número de la suerte" in user_input:
+        return f"Tu numero de la suerte hoy es: {random.randint(1, 100)}"
+
     if is_calculator_query(user_input) or contains_number(user_input):
         r = calculate(user_input)
         if r:
@@ -238,7 +323,7 @@ def get_local_response(user_input: str, riddle_state: dict = None):
             return "Buenas tardes! ¿Como vas?"
         if "buenas noches" in user_input:
             return "Buenas noches! ¿Algo antes de dormir?"
-        return "Que tal! Preguntame la hora, el clima, un chiste, o lo que sea."
+        return "Que tal! Preguntame la hora, el clima, un chiste, una curiosidad, o lo que sea."
 
     if is_farewell(user_input):
         return "Nos vemos, cuando quieras."
@@ -250,10 +335,10 @@ def get_local_response(user_input: str, riddle_state: dict = None):
         return "Si tienes API key hablo con GPT, si no uso respuestas que tengo guardadas. Es simple."
 
     if "quien te creo" in user_input or "quien te hizo" in user_input:
-        return "Me hicieron para un parcial de la universidad. Esta en github.com/Ericksin26/chatbot-ia"
+        return "Me creo Baules, Erick. Es muy inteligente, capaz y unico, seguramente lograra muchas cosas."
 
     if "que puedes hacer" in user_input:
-        return "Preguntame la hora, la fecha, el clima, un chiste, una adivinanza, o hazme una cuenta tipo 'cuanto es 15 * 3'. Tambien se de Python, IA y esas cosas."
+        return "Preguntame la hora, la fecha, el clima, un chiste, una adivinanza, una curiosidad, un consejo, o hazme una cuenta. Tambien puedo lanzar una moneda, tirar un dado o darte tu numero de la suerte."
 
     if topic == "python":
         temas = [
@@ -322,6 +407,12 @@ def show_help():
     print("  chiste           - Un chiste")
     print("  adivinanza       - Jugar a adivinar")
     print("  calculadora      - Ej: cuanto es 25 * 4")
+    print("  curiosidad       - Dato interesante")
+    print("  consejo          - Un consejo util")
+    print("  motivacion       - Frase motivadora")
+    print("  cara o cruz      - Lanza una moneda")
+    print("  dado             - Tira un dado")
+    print("  numero suerte    - Tu numero de la suerte")
     print()
     print("  TEMAS:")
     print("  Python, IA, Datos, Web, Matematicas")

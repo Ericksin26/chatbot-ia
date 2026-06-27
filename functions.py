@@ -126,6 +126,36 @@ def is_riddle_query(text: str) -> bool:
     return any(k in text for k in keywords)
 
 
+def is_curiosity_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("curiosidad", "dato curioso", "sabias que", "sabías que", "interesante", "fun fact")
+    return any(k in text for k in keywords)
+
+
+def is_advice_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("consejo", "recomienda", "recomendacion", "recomendación", "que hago", "que me aconsejas", "ayuda")
+    return any(k in text for k in keywords)
+
+
+def is_motivation_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("motivacion", "motivación", "motiva", "frase", "inspira", "animo", "ánimo", "superacion", "superación")
+    return any(k in text for k in keywords)
+
+
+def is_coin_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("moneda", "cara o cruz", "cara y cruz", "lanza una moneda", "tira una moneda")
+    return any(k in text for k in keywords)
+
+
+def is_dice_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("dado", "tira un dado", "lanza un dado", "numero aleatorio", "número aleatorio")
+    return any(k in text for k in keywords)
+
+
 def split_conversation(history: list, max_pairs: int = 5) -> list:
     return history[-max_pairs:]
 
@@ -160,6 +190,10 @@ def detect_topic(text: str) -> str:
         "chiste": ["chiste", "broma", "gracioso", "reir", "reír", "humor"],
         "calculadora": ["calcula", "calculadora", "suma", "resta", "multiplica", "divide", "operacion", "operación", "mas", "menos", "por"],
         "adivinanza": ["adivinanza", "adivina", "acertijo", "que soy", "qué soy"],
+        "curiosidad": ["curiosidad", "dato curioso", "sabias que", "sabías que", "fun fact"],
+        "consejo": ["consejo", "recomienda", "recomendacion", "recomendación"],
+        "motivacion": ["motivacion", "motivación", "frase", "inspira", "animo", "ánimo", "superacion"],
+        "suerte": ["moneda", "cara o cruz", "dado", "suerte", "numero de la suerte", "número de la suerte"],
         "saludo": ["hola", "buenos", "buenas", "hey"],
     }
     for topic, keywords in topics.items():
