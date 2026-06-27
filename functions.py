@@ -1,6 +1,8 @@
 import re
 import json
 import os
+import random
+import math
 from datetime import datetime
 
 
@@ -57,6 +59,42 @@ def is_farewell(text: str) -> bool:
     return any(f in text for f in farewells)
 
 
+def is_weather_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("clima", "temperatura", "lluvia", "soleado", "climático", "climatica", "pronostico", "pronóstico")
+    return any(k in text for k in keywords)
+
+
+def is_time_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("hora", "que hora es", "qué hora es", "hora actual", "reloj")
+    return any(k in text for k in keywords)
+
+
+def is_date_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("fecha", "que dia es", "qué día es", "dia de hoy", "día de hoy", "que fecha", "qué fecha")
+    return any(k in text for k in keywords)
+
+
+def is_joke_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("chiste", "broma", "hazme reir", "hazme reír", "algo gracioso", "cuentame un chiste", "cuéntame un chiste")
+    return any(k in text for k in keywords)
+
+
+def is_calculator_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("calcula", "calculadora", "cuanto es", "cuánto es", "resultado", "operacion", "operación")
+    return any(k in text for k in keywords)
+
+
+def is_riddle_query(text: str) -> bool:
+    text = text.lower().strip()
+    keywords = ("adivinanza", "adivina", "acertijo", "que soy", "qué soy")
+    return any(k in text for k in keywords)
+
+
 def split_conversation(history: list, max_pairs: int = 5) -> list:
     return history[-max_pairs:]
 
@@ -73,6 +111,10 @@ def contains_question(text: str) -> bool:
     return "?" in text or text.lower().startswith(("que", "qué", "como", "cómo", "cuando", "cuándo", "donde", "dónde", "por que", "por qué", "quien", "quién", "cual", "cuál"))
 
 
+def contains_number(text: str) -> bool:
+    return bool(re.search(r'\d+', text))
+
+
 def detect_topic(text: str) -> str:
     text = text.lower()
     topics = {
@@ -81,6 +123,12 @@ def detect_topic(text: str) -> str:
         "datos": ["datos", "data", "analisis", "análisis", "estadistica", "estadística", "big data"],
         "web": ["web", "internet", "pagina", "página", "sitio", "html", "css", "javascript", "django", "flask"],
         "matematicas": ["matematica", "matemática", "calculo", "calcular", "algebra", "álgebra", "numero", "número"],
+        "clima": ["clima", "temperatura", "lluvia", "soleado", "pronostico", "pronóstico"],
+        "tiempo": ["hora", "reloj", "minuto", "segundo"],
+        "fecha": ["fecha", "dia", "día", "semana", "mes", "año", "calendario"],
+        "chiste": ["chiste", "broma", "gracioso", "reir", "reír", "humor"],
+        "calculadora": ["calcula", "calculadora", "suma", "resta", "multiplica", "divide", "operacion", "operación", "mas", "menos", "por"],
+        "adivinanza": ["adivinanza", "adivina", "acertijo", "que soy", "qué soy"],
         "saludo": ["hola", "buenos", "buenas", "hey"],
     }
     for topic, keywords in topics.items():

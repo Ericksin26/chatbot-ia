@@ -47,14 +47,25 @@ python main.py -v      # Version
 
 ### Comandos durante la conversacion
 
-| Comando  | Descripcion |
-|----------|------------|
-| ayuda    | Muestra los comandos y temas disponibles |
-| stats    | Muestra estadisticas de la conversacion |
-| clear    | Limpia el historial de la sesion |
-| salir    | Termina la conversacion |
+| Comando       | Descripcion |
+|---------------|------------|
+| ayuda         | Muestra los comandos y temas disponibles |
+| stats         | Muestra estadisticas de la conversacion |
+| clear         | Limpia el historial de la sesion |
+| salir         | Termina la conversacion |
 
-### Temas que soporta
+### Funciones especiales
+
+| Pregunta                  | Que hace |
+|---------------------------|----------|
+| clima / temperatura       | Muestra el clima simulado del dia |
+| hora / que hora es        | Muestra la hora actual |
+| fecha / que dia es        | Muestra la fecha actual |
+| chiste / hazme reir       | Cuenta un chiste aleatorio |
+| cuanto es 25 * 4          | Calculadora (suma, resta, multiplica, divide) |
+| adivinanza / acertijo     | Adivinanza interactiva |
+
+### Temas de conocimiento
 
 - Python (programacion, codigo, librerias)
 - Inteligencia Artificial (IA, machine learning, deep learning)
@@ -66,13 +77,17 @@ python main.py -v      # Version
 ## Caracteristicas
 
 - **Modo OpenAI**: Respuestas inteligentes usando GPT-3.5/GPT-4
-- **Modo Local**: Base de conocimiento local con +30 respuestas categorizadas
+- **Modo Local**: Base de conocimiento local con +40 respuestas categorizadas
+- **Clima**: Simula condiciones climaticas del dia actual
+- **Hora y fecha**: Muestra la hora y fecha actual del sistema
+- **Chistes**: Banco de 15 chistes aleatorios
+- **Calculadora**: Evalua expresiones matematicas (ej: "cuanto es 25 * 4 + 10")
+- **Adivinanzas**: 12 adivinanzas interactivas con sistema de pistas
 - **Deteccion de temas**: Identifica automaticamente el tema de la pregunta
 - **Historial persistente**: Guarda la conversacion en `historial.json`
 - **Estadisticas**: Cuenta mensajes, palabras, tokens y tema mas frecuente
 - **Manejo de errores**: Fallback automatico a modo local si OpenAI falla
 - **Funciones organizadas**: Modular, reutilizable y documentada
-- **Multiple responses**: Varias respuestas por tema para evitar repeticion
 
 ## Creditos
 
