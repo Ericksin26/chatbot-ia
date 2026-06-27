@@ -45,14 +45,14 @@ def ask_openai(client, messages):
 
 def get_current_time():
     now = datetime.now()
-    return f"En este momento son las {now.hour}:{now.minute:02d}."
+    return f"Son las {now.hour}:{now.minute:02d}"
 
 
 def get_current_date():
     dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
     meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
     now = datetime.now()
-    return f"Hoy estamos a {dias[now.weekday()]}, {now.day} de {meses[now.month - 1]} de {now.year}."
+    return f"Hoy es {dias[now.weekday()]} {now.day} de {meses[now.month - 1]} de {now.year}"
 
 
 def get_weather(city: str = None):
@@ -65,25 +65,25 @@ def get_weather(city: str = None):
             "temp_min": 24, "temp_max": 32,
             "hum_min": 75, "hum_max": 95,
             "desc": [
-                "calor humedo con sol y nubes",
-                "dia tipico panameno, caluroso y humedo",
+                "calor humedo, sol y nubes",
+                "caluroso y humedo como siempre",
                 "sol intenso con brisa del Pacifico",
-                "calor tropical, nubes pasajeras",
-                "cielo nublado con bochorno",
-                "lluvia ligera y calor tipico",
-                "soleado con alta sensacion termica",
-                "nubes y claros, temperatura alta",
+                "calor tropical, nubes pasando",
+                "nublado con bochorno",
+                "llovizna ligera y calor",
+                "soleado, sensacion termica alta",
+                "nubes y claros, calor tipico",
             ],
-            "extra": "Clima tropical, tipico de Panama. Siempre es buena idea llevar agua."
+            "fin": ["Tipico clima de Panama.", "Panama tropical, ya sabes.", "Calor panameno de siempre."]
         },
-        "bogota": {"nombre": "Bogota", "temp_min": 7, "temp_max": 18, "hum_min": 60, "hum_max": 85, "desc": ["frio bogotano con neblina", "dia nublado tipico", "llovizna y ambiente frio", "niebla matutina y tarde fria"], "extra": "Clima frio de altura, lleva chaqueta."},
-        "medellin": {"nombre": "Medellin", "temp_min": 16, "temp_max": 26, "hum_min": 55, "hum_max": 80, "desc": ["primavera todo el ano", "dia templado y agradable", "soleado con brisa fresca"], "extra": "Ciudad de la eterna primavera."},
-        "caracas": {"nombre": "Caracas", "temp_min": 18, "temp_max": 28, "hum_min": 60, "hum_max": 85, "desc": ["calor de valle con nubes", "dia caluroso tipico caraqueno", "sol y nubes alternados"], "extra": "Clima primaveral de montana cerca del mar."},
-        "lima": {"nombre": "Lima", "temp_min": 14, "temp_max": 24, "hum_min": 75, "hum_max": 95, "desc": ["garua limena y cielo gris", "nublado con alta humedad", "cielo cubierto tipico de Lima"], "extra": "Lima y su cielo nublado la mayor parte del ano."},
-        "buenos aires": {"nombre": "Buenos Aires", "temp_min": 10, "temp_max": 28, "hum_min": 55, "hum_max": 85, "desc": ["dia templado en Buenos Aires", "soleado con brisa del rio", "nubes variables tipicas"], "extra": "Clima templado, tipico del Rio de la Plata."},
-        "mexico": {"nombre": "Ciudad de Mexico", "temp_min": 10, "temp_max": 24, "hum_min": 40, "hum_max": 70, "desc": ["dia fresco en el valle", "soleado con aire limpio", "nubes y sol tipico del altiplano"], "extra": "Clima de alta montana, fresco la mayor parte del ano."},
-        "madrid": {"nombre": "Madrid", "temp_min": 4, "temp_max": 30, "hum_min": 30, "hum_max": 65, "desc": ["dia soleado en Madrid", "cielo despejado", "frio por la manana, calor al mediodia"], "extra": "Continental mediterraneo, inviernos frios y veranos calurosos."},
-        "santiago": {"nombre": "Santiago", "temp_min": 6, "temp_max": 28, "hum_min": 30, "hum_max": 65, "desc": ["dia despejado en Santiago", "cielo azul tipico", "nubes altas durante la tarde"], "extra": "Clima mediterraneo con estaciones marcadas."},
+        "bogota": {"nombre": "Bogota", "temp_min": 7, "temp_max": 18, "hum_min": 60, "hum_max": 85, "desc": ["frio con neblina", "nublado como siempre", "llovizna y ambiente frio", "niebla en la manana"], "fin": ["Frio bogotano, lleva chaqueta.", "Altura, hace frio."]},
+        "medellin": {"nombre": "Medellin", "temp_min": 16, "temp_max": 26, "hum_min": 55, "hum_max": 80, "desc": ["templado y agradable", "soleado con brisa", "clima de eterna primavera"], "fin": ["Medellin siempre agradable.", "La eterna primavera."]},
+        "caracas": {"nombre": "Caracas", "temp_min": 18, "temp_max": 28, "hum_min": 60, "hum_max": 85, "desc": ["calor de valle", "caluroso tipico", "sol y nubes"], "fin": ["Clima caraqueno de siempre.", "Calorcito de Caracas."]},
+        "lima": {"nombre": "Lima", "temp_min": 14, "temp_max": 24, "hum_min": 75, "hum_max": 95, "desc": ["garua y cielo gris", "nublado con alta humedad", "cielo cubierto tipico"], "fin": ["Lima y su cielo gris.", "Tipico clima limeno."]},
+        "buenos aires": {"nombre": "Buenos Aires", "temp_min": 10, "temp_max": 28, "hum_min": 55, "hum_max": 85, "desc": ["templado", "soleado con brisa del rio", "nubes variables"], "fin": ["Clima porteño tipico.", "Buenos Aires y su clima."]},
+        "mexico": {"nombre": "Ciudad de Mexico", "temp_min": 10, "temp_max": 24, "hum_min": 40, "hum_max": 70, "desc": ["fresco en el valle", "soleado con aire limpio", "nubes y sol"], "fin": ["Clima de ciudad de Mexico.", "Fresco por la altura."]},
+        "madrid": {"nombre": "Madrid", "temp_min": 4, "temp_max": 30, "hum_min": 30, "hum_max": 65, "desc": ["soleado", "cielo despejado", "frio en la manana, calor al mediodia"], "fin": ["Madrid tipico.", "Continental, estaciones marcadas."]},
+        "santiago": {"nombre": "Santiago", "temp_min": 6, "temp_max": 28, "hum_min": 30, "hum_max": 65, "desc": ["despejado", "cielo azul", "nubes altas en la tarde"], "fin": ["Santiago y su cielo azul.", "Clima mediterraneo."]},
     }
 
     if city and city in climas:
@@ -92,25 +92,21 @@ def get_weather(city: str = None):
         hum = random.randint(c["hum_min"], c["hum_max"])
         wind = random.randint(5, 20)
         desc = random.choice(c["desc"])
-        extra = c["extra"]
-        return (
-            f"Clima en {c['nombre']}: {desc}. "
-            f"Temperatura alrededor de {temp}°C, {hum}% de humedad, viento de {wind} km/h. "
-            f"{extra}"
-        )
+        fin = random.choice(c["fin"])
+        return f"En {c['nombre']} esta {desc}. Como {temp}°C, {hum}% de humedad, viento de {wind} km/h. {fin}"
 
     pair = random.randint(0, 9)
     desc = [
-        "dia soleado con algunas nubes",
-        "jornada parcialmente nublada",
+        "soleado con nubes",
+        "parcialmente nublado",
         "mayormente soleado",
-        "nublado, pero sin lluvia por ahora",
-        "dia fresco y despejado",
+        "nublado pero sin lluvia",
+        "fresco y despejado",
         "lluvia ligera de vez en cuando",
-        "posibles tormentas electricas",
-        "dia ventoso y nublado",
+        "posibles tormentas",
+        "ventoso y nublado",
         "niebla en la manana, luego mejora",
-        "cielo completamente despejado",
+        "cielo despejado",
     ][pair]
     temp = random.randint(18, 32)
     hum = random.randint(45, 90)
@@ -118,17 +114,13 @@ def get_weather(city: str = None):
 
     extra = ""
     if "lluv" in desc or "torment" in desc:
-        extra = "Mejor llevar paraguas por si acaso."
+        extra = "Lleva paraguas por si acaso."
     elif temp > 28:
         extra = "Va a hacer calor, viste fresco."
     elif temp < 22:
-        extra = "Temperatura agradable, buen dia para salir."
+        extra = "Temperatura agradable."
 
-    return (
-        f"Hoy tenemos un {desc}. "
-        f"Temperatura de {temp}°C, {hum}% de humedad, viento de {wind} km/h. "
-        f"{extra}"
-    )
+    return f"Hoy tenemos {desc}. {temp}°C, {hum}% humedad, viento {wind} km/h. {extra}"
 
 
 def get_joke():
@@ -136,15 +128,15 @@ def get_joke():
         "¿Que le dice un pez a otro pez? Nada.",
         "¿Como se despiden los quimicos? Acidamente.",
         "¿Que hace una abeja en el gimnasio? Zumba.",
-        "Habia una vez un pastor con 30 ovejas. Se cayo una y quedaron 29. ¿Como se llamaba el pastor? Pasto... no, se llamaba Pastor.",
+        "Un pastor tenia 30 ovejas. Se cayo una y quedaron 29. ¿Como se llamaba el pastor? Se llamaba Pastor.",
         "¿Que le dice un semaforo a otro? No me mires, me estoy cambiando.",
-        "Un hombre pide una pizza y el mesero pregunta si la quiere entera o en partes. El hombre dice: entera, no soy partidario.",
+        "Un hombre pide una pizza y le preguntan si la quiere entera o en partes. Dice: entera, no soy partidario.",
         "¿Cual es el animal mas antiguo? La cebra, porque esta en blanco y negro.",
         "¿Que le dice un 0 a un 8? Bonito cinturon.",
         "Si tienes 10 manzanas en una mano y 15 en la otra, ¿que tienes? Manos grandes.",
         "¿Que hace una computadora en el campo? Byte.",
-        "¿Cual es el colmo de un programador? Tener un hijo y llamarle Cursor.",
-        "Llega una mama y le dice a su hijo: hijo, hoy te portaste mal en la escuela. El hijo responde: mama, hoy no fui a la escuela. La mama dice: no importa, igual te portaste mal.",
+        "El colmo de un programador: tener un hijo y llamarle Cursor.",
+        "Llega una mama y le dice al hijo: hoy te portaste mal. El hijo: mama, hoy no fui a la escuela. La mama: no importa, igual te portaste mal.",
     ]
     return random.choice(chistes)
 
@@ -165,7 +157,7 @@ def calculate(expr: str):
         if isinstance(result, float):
             if result == int(result):
                 result = int(result)
-        return f"El resultado es {result}."
+        return f"Da {result}"
     except:
         return None
 
@@ -180,10 +172,6 @@ def get_riddle():
         ("Cuanto mas quitas, mas grande se vuelve. ¿Que soy?", "El hoyo", "hoyo"),
         ("Vuelo sin alas, lloro sin ojos. ¿Que soy?", "La nube", "nube"),
         ("Tengo llaves pero no abro puertas. ¿Que soy?", "El piano", "piano"),
-        ("Puedo llenar una habitacion sin ocupar espacio. ¿Que soy?", "La luz", "luz"),
-        ("Corro sin pies, y si me detienes muero. ¿Que soy?", "El rio", "rio"),
-        ("Cuando me nombras desaparezco. ¿Que soy?", "El silencio", "silencio"),
-        ("Tiene cabeza y cola pero no tiene cuerpo. ¿Que es?", "La moneda", "moneda"),
     ]
     pregunta, respuesta, pista = random.choice(items)
     return {"pregunta": pregunta, "respuesta": respuesta, "pista": pista}
@@ -197,13 +185,13 @@ def handle_riddle(user_input, state):
         if user_input == correcta or user_input in correcta or correcta in user_input:
             state["activa"] = False
             state["esperando"] = False
-            return f"¡Correcto! Era {state['respuesta']}. ¿Quieres otra?"
+            return f"¡Bien ahi! Era {state['respuesta']}. ¿Otra?"
         elif any(w in user_input for w in ["no se", "no sé", "rindo", "rinde", "otra"]):
             state["activa"] = False
             state["esperando"] = False
-            return f"Era {state['respuesta']}. ¿Intentamos con otra?"
+            return f"Era {state['respuesta']}. ¿Otra?"
         else:
-            return f"No, no es esa. Una pista: empieza con '{state['pista'][0]}'. ¿O te rindes?"
+            return f"No. La palabra empieza con '{state['pista'][0]}'. ¿Te rindes?"
 
     if is_riddle_query(user_input):
         r = get_riddle()
@@ -211,7 +199,7 @@ def handle_riddle(user_input, state):
         state["esperando"] = True
         state["respuesta"] = r["respuesta"]
         state["pista"] = r["pista"]
-        return f"A ver si adivinas: {r['pregunta']}"
+        return f"Adivina: {r['pregunta']}"
 
     return None
 
@@ -245,95 +233,95 @@ def get_local_response(user_input: str, riddle_state: dict = None):
 
     if is_greeting(user_input):
         if "buenos dias" in user_input or "buen dia" in user_input:
-            return "¡Buenos dias! ¿En que puedo ayudarte hoy?"
+            return "Buenos dias! ¿Que necesitas?"
         if "buenas tardes" in user_input:
-            return "¡Buenas tardes! ¿Como va todo?"
+            return "Buenas tardes! ¿Como vas?"
         if "buenas noches" in user_input:
-            return "¡Buenas noches! ¿Necesitas algo antes de dormir?"
-        return "¡Hola! ¿Que necesitas? Puedo ayudarte con programacion, darte la hora, el clima, contarte un chiste o lo que sea."
+            return "Buenas noches! ¿Algo antes de dormir?"
+        return "Que tal! Preguntame la hora, el clima, un chiste, o lo que sea."
 
     if is_farewell(user_input):
-        return "¡Hasta luego! Cuando quieras vuelve a escribir."
+        return "Nos vemos, cuando quieras."
 
     if "gracias" in user_input:
         return "De nada, para eso estoy."
 
     if "como funciona" in user_input:
-        return "En terminos simples: si tienes configurada una API key de OpenAI, hablo con GPT. Si no, uso una base de respuestas que tengo guardada sobre programacion, IA, matematicas, clima y otras cosas."
+        return "Si tienes API key hablo con GPT, si no uso respuestas que tengo guardadas. Es simple."
 
     if "quien te creo" in user_input or "quien te hizo" in user_input:
-        return "Me hicieron como proyecto universitario (Parcial 3) para practicar Python, funciones y conceptos de IA. El codigo esta en github.com/Ericksin26/chatbot-ia"
+        return "Me hicieron para un parcial de la universidad. Esta en github.com/Ericksin26/chatbot-ia"
 
     if "que puedes hacer" in user_input:
-        return "Preguntame la hora, la fecha, el clima, un chiste, una adivinanza, o dime una operacion como 'cuanto es 15 * 3'. Tambien se de Python, IA, datos y matematicas."
+        return "Preguntame la hora, la fecha, el clima, un chiste, una adivinanza, o hazme una cuenta tipo 'cuanto es 15 * 3'. Tambien se de Python, IA y esas cosas."
 
     if topic == "python":
         temas = [
-            "Python lo creo Guido van Rossum en 1991. Es un lenguaje interpretado y multiplataforma que se usa mucho en IA, ciencia de datos y web.",
-            "Una de las ventajas de Python es que su sintaxis es muy limpia y facil de leer. Por eso es tan popular entre principiantes y profesionales.",
-            "Python tiene librerias para todo: NumPy y Pandas para datos, Django y Flask para web, TensorFlow y PyTorch para machine learning.",
-            "A diferencia de otros lenguajes, Python usa indentacion en vez de llaves para definir bloques de codigo. Al principio puede sonar raro, pero ayuda a escribir codigo ordenado.",
+            "Python lo hizo Guido van Rossum en 1991. Se usa caleta en IA, datos y web.",
+            "Lo bueno de Python es que se lee casi como ingles, por eso es tan popular.",
+            "Tiene librerias para todo: NumPy, Pandas, Django, Flask, TensorFlow...",
+            "Usa indentacion en vez de llaves. Al principio cuesta pero despues te acostumbras.",
         ]
         return temas[len(user_input) % len(temas)]
 
     if topic == "ia":
         temas = [
-            "La inteligencia artificial basicamente busca que las maquinas hagan cosas que normalmente requieren inteligencia humana, como reconocer voz, tomar decisiones o traducir idiomas.",
-            "Hay dos tipos de IA: la debil, que hace tareas especificas (como Siri o los chatbots), y la fuerte, que seria una maquina con razonamiento general (todavia no existe).",
-            "El machine learning es una rama de la IA donde la maquina aprende de datos en vez de ser programada paso a paso. Hay aprendizaje supervisado, no supervisado y por refuerzo.",
-            "El deep learning usa redes neuronales con muchas capas. Es lo que hay detras de los autos autonomos, el reconocimiento facial y ChatGPT.",
+            "La IA basicamente es que las maquinas hagan cosas que requieren inteligencia humana: reconocer voz, decisiones, traduccion.",
+            "Hay IA debil (Siri, chatbots) e IA fuerte (la de las peliculas, que aun no existe).",
+            "Machine learning es cuando la maquina aprende sola de los datos. Hay tres tipos: supervisado, no supervisado y por refuerzo.",
+            "Deep learning son redes neuronales con muchas capas. Es lo que usan los autos autonomos y ChatGPT.",
         ]
         return temas[len(user_input) % len(temas)]
 
     if topic == "datos":
         temas = [
-            "La ciencia de datos mezcla estadistica, programacion y conocimiento del negocio para sacar informacion util de los datos.",
-            "Las librerias mas usadas en Python para datos son NumPy (numeros), Pandas (tablas), Matplotlib (graficas) y Scikit-learn (machine learning).",
-            "El analisis de datos suele seguir estos pasos: recoleccion, limpieza, exploracion, modelado e interpretacion.",
+            "Ciencia de datos es mezclar estadistica con programacion para sacar info util de los datos.",
+            "Las librerias mas usadas: NumPy (numeros), Pandas (tablas), Matplotlib (graficas), Scikit-learn (machine learning).",
+            "El analisis de datos va asi: recoleccion, limpieza, exploracion, modelado, interpretacion.",
         ]
         return temas[len(user_input) % len(temas)]
 
     if topic == "web":
         temas = [
-            "En desarrollo web hay dos partes: frontend (lo que ves) y backend (la logica detras). Python se usa mucho en backend con Django o Flask.",
-            "Django es un framework completo que ya trae ORM, autenticacion y panel de administracion. Flask es mas minimalista y flexible.",
+            "El desarrollo web tiene frontend (lo que ves) y backend (la logica). Python se usa en backend con Django o Flask.",
+            "Django ya trae de todo: ORM, autenticacion, panel admin. Flask es mas simple y flexible.",
         ]
         return temas[len(user_input) % len(temas)]
 
     if topic == "matematicas":
         temas = [
-            "Las matematicas son la base de la programacion y la IA. Sobre todo el algebra lineal, el calculo, la probabilidad y la estadistica.",
-            "El algebra lineal es clave para entender redes neuronales. Los datos se representan como vectores y matrices, y las operaciones entre ellos son el corazon del deep learning.",
+            "Las matematicas son la base de la programacion. Algebra lineal, calculo, probabilidad y estadistica sobre todo.",
+            "El algebra lineal es clave para las redes neuronales. Los datos son vectores y matrices.",
         ]
         return temas[len(user_input) % len(temas)]
 
     if contains_question(user_input):
-        return "No estoy seguro de entender tu pregunta. Puedo ayudarte con programacion, IA, clima, hora, chistes o calculos. Intenta ser mas especifico."
+        return "No entendi bien la pregunta. Prueba con 'hora', 'clima', 'chiste', o preguntame sobre Python o IA."
 
     return random.choice([
-        "No entendi muy bien, pero puedes pedirme la hora, el clima, un chiste, una adivinanza o preguntarme sobre programacion.",
-        "Si no sabes que preguntar, escribe 'ayuda' para ver todo lo que puedo hacer.",
-        "No estoy seguro de que decir. Prueba con 'clima', 'hora', 'chiste' o preguntame sobre Python o IA.",
+        "No entendi, pero puedes pedirme la hora, el clima, un chiste o preguntar de programacion.",
+        "Si no sabes que preguntar, pon 'ayuda' para ver las opciones.",
+        "No se que decir. Prueba 'clima', 'hora', 'chiste' o pregunta sobre Python o IA.",
     ])
 
 
 def show_help():
     print()
     print("-" * 50)
-    print("  COSAS QUE PUEDES PREGUNTAR")
+    print("  QUE PUEDES HACER")
     print("-" * 50)
     print("  ayuda            - Ver esto")
     print("  salir            - Terminar")
-    print("  stats            - Ver estadisticas")
-    print("  clear            - Limpiar historial")
+    print("  stats            - Estadisticas")
+    print("  clear            - Borrar historial")
     print()
     print("  hora             - Que hora es")
-    print("  fecha            - Que dia es hoy")
+    print("  fecha            - Que dia es")
     print("  clima            - Clima de tu ciudad")
     print("  clima Panama     - Clima de una ciudad")
-    print("  chiste           - Escuchar un chiste")
+    print("  chiste           - Un chiste")
     print("  adivinanza       - Jugar a adivinar")
-    print("  calculadora      - Ej: 'cuanto es 25 * 4'")
+    print("  calculadora      - Ej: cuanto es 25 * 4")
     print()
     print("  TEMAS:")
     print("  Python, IA, Datos, Web, Matematicas")
@@ -343,7 +331,7 @@ def show_help():
 
 def show_stats(history: list):
     if not history:
-        print("\n  No hay mensajes guardados.\n")
+        print("\n  No hay mensajes.\n")
         return
 
     total = len(history)
@@ -356,10 +344,10 @@ def show_stats(history: list):
     print("-" * 50)
     print("  ESTADISTICAS")
     print("-" * 50)
-    print(f"  Mensajes:        {total}")
-    print(f"  Tus palabras:    {words_user}")
-    print(f"  Mis palabras:    {words_bot}")
-    print(f"  Tema frecuente:  {top_topic}")
+    print(f"  Mensajes:       {total}")
+    print(f"  Tus palabras:   {words_user}")
+    print(f"  Mis palabras:   {words_bot}")
+    print(f"  Tema comun:     {top_topic}")
     print("-" * 50)
     print()
 
@@ -369,7 +357,7 @@ def chat():
     print("=" * 50)
     print(f"  {APP_NAME} v{VERSION}")
     print("=" * 50)
-    print("  Escribe 'ayuda' para empezar")
+    print("  Escribe 'ayuda' para ver opciones")
     print("  Escribe 'salir' para terminar")
     print("-" * 50)
 
@@ -377,7 +365,7 @@ def chat():
     if client:
         print("  Con OpenAI conectado")
     else:
-        print("  Modo local (sin API key)")
+        print("  Modo local")
     print("-" * 50)
 
     history = load_history() if SAVE_HISTORY else []
@@ -388,7 +376,7 @@ def chat():
         try:
             user_input = input("\nTu: ")
             if not validate_input(user_input):
-                print("Chatbot: Escribe algo, estoy aqui.")
+                print("Chatbot: Escribe algo")
                 continue
 
             user_input = clean_text(user_input)
@@ -396,7 +384,7 @@ def chat():
             if is_exit_command(user_input):
                 if SAVE_HISTORY:
                     save_history(history)
-                print("\nChatbot: Hasta luego!\n")
+                print("\nChao!\n")
                 break
 
             if is_help_command(user_input):
@@ -418,7 +406,7 @@ def chat():
                     messages = build_messages(user_input, history)
                     response = ask_openai(client, messages)
                 except Exception as e:
-                    print(f"Error con OpenAI: {e}. Cambio a modo local.")
+                    print(f"Error con OpenAI: {e}. Paso a modo local.")
                     use_api = False
                     response = get_local_response(user_input, riddle_state)
             else:
@@ -434,13 +422,13 @@ def chat():
         except KeyboardInterrupt:
             if SAVE_HISTORY:
                 save_history(history)
-            print("\n\nHasta luego!\n")
+            print("\n\nChao!\n")
             break
         except EOFError:
             print()
             break
         except Exception as e:
-            print(f"Error: {e}. Continuo en modo local.")
+            print(f"Error: {e}. Continua modo local.")
             use_api = False
             client = None
 
