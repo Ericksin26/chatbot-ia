@@ -5,7 +5,7 @@ from functions import (
     is_greeting, is_farewell, contains_question, detect_topic,
     is_weather_query, is_time_query, is_date_query,
     is_joke_query, is_calculator_query, is_riddle_query,
-    contains_number,
+    contains_number, detect_city,
     split_conversation, count_words, count_tokens,
     save_history, load_history
 )
@@ -55,9 +55,49 @@ def get_current_date():
     return f"Hoy estamos a {dias[now.weekday()]}, {now.day} de {meses[now.month - 1]} de {now.year}."
 
 
-def get_weather():
+def get_weather(city: str = None):
     now = datetime.now()
     random.seed(now.day + now.month + now.year)
+
+    climas = {
+        "panama": {
+            "nombre": "Panama",
+            "temp_min": 24, "temp_max": 32,
+            "hum_min": 75, "hum_max": 95,
+            "desc": [
+                "calor humedo con sol y nubes",
+                "dia tipico panameno, caluroso y humedo",
+                "sol intenso con brisa del Pacifico",
+                "calor tropical, nubes pasajeras",
+                "cielo nublado con bochorno",
+                "lluvia ligera y calor tipico",
+                "soleado con alta sensacion termica",
+                "nubes y claros, temperatura alta",
+            ],
+            "extra": "Clima tropical, tipico de Panama. Siempre es buena idea llevar agua."
+        },
+        "bogota": {"nombre": "Bogota", "temp_min": 7, "temp_max": 18, "hum_min": 60, "hum_max": 85, "desc": ["frio bogotano con neblina", "dia nublado tipico", "llovizna y ambiente frio", "niebla matutina y tarde fria"], "extra": "Clima frio de altura, lleva chaqueta."},
+        "medellin": {"nombre": "Medellin", "temp_min": 16, "temp_max": 26, "hum_min": 55, "hum_max": 80, "desc": ["primavera todo el ano", "dia templado y agradable", "soleado con brisa fresca"], "extra": "Ciudad de la eterna primavera."},
+        "caracas": {"nombre": "Caracas", "temp_min": 18, "temp_max": 28, "hum_min": 60, "hum_max": 85, "desc": ["calor de valle con nubes", "dia caluroso tipico caraqueno", "sol y nubes alternados"], "extra": "Clima primaveral de montana cerca del mar."},
+        "lima": {"nombre": "Lima", "temp_min": 14, "temp_max": 24, "hum_min": 75, "hum_max": 95, "desc": ["garua limena y cielo gris", "nublado con alta humedad", "cielo cubierto tipico de Lima"], "extra": "Lima y su cielo nublado la mayor parte del ano."},
+        "buenos aires": {"nombre": "Buenos Aires", "temp_min": 10, "temp_max": 28, "hum_min": 55, "hum_max": 85, "desc": ["dia templado en Buenos Aires", "soleado con brisa del rio", "nubes variables tipicas"], "extra": "Clima templado, tipico del Rio de la Plata."},
+        "mexico": {"nombre": "Ciudad de Mexico", "temp_min": 10, "temp_max": 24, "hum_min": 40, "hum_max": 70, "desc": ["dia fresco en el valle", "soleado con aire limpio", "nubes y sol tipico del altiplano"], "extra": "Clima de alta montana, fresco la mayor parte del ano."},
+        "madrid": {"nombre": "Madrid", "temp_min": 4, "temp_max": 30, "hum_min": 30, "hum_max": 65, "desc": ["dia soleado en Madrid", "cielo despejado", "frio por la manana, calor al mediodia"], "extra": "Continental mediterraneo, inviernos frios y veranos calurosos."},
+        "santiago": {"nombre": "Santiago", "temp_min": 6, "temp_max": 28, "hum_min": 30, "hum_max": 65, "desc": ["dia despejado en Santiago", "cielo azul tipico", "nubes altas durante la tarde"], "extra": "Clima mediterraneo con estaciones marcadas."},
+    }
+
+    if city and city in climas:
+        c = climas[city]
+        temp = random.randint(c["temp_min"], c["temp_max"])
+        hum = random.randint(c["hum_min"], c["hum_max"])
+        wind = random.randint(5, 20)
+        desc = random.choice(c["desc"])
+        extra = c["extra"]
+        return (
+            f"Clima en {c['nombre']}: {desc}. "
+            f"Temperatura alrededor de {temp}°C, {hum}% de humedad, viento de {wind} km/h. "
+            f"{extra}"
+        )
 
     pair = random.randint(0, 9)
     desc = [
@@ -80,13 +120,13 @@ def get_weather():
     if "lluv" in desc or "torment" in desc:
         extra = "Mejor llevar paraguas por si acaso."
     elif temp > 28:
-        extra = "Va a hacer calor, asi que viste fresco."
+        extra = "Va a hacer calor, viste fresco."
     elif temp < 22:
-        extra = "Temperatura agradable, un dia ideal para salir."
+        extra = "Temperatura agradable, buen dia para salir."
 
     return (
         f"Hoy tenemos un {desc}. "
-        f"La temperatura ronda los {temp}°C, con {hum}% de humedad y viento de {wind} km/h. "
+        f"Temperatura de {temp}°C, {hum}% de humedad, viento de {wind} km/h. "
         f"{extra}"
     )
 
@@ -192,7 +232,8 @@ def get_local_response(user_input: str, riddle_state: dict = None):
         return get_current_date()
 
     if is_weather_query(user_input):
-        return get_weather()
+        city = detect_city(user_input)
+        return get_weather(city)
 
     if is_joke_query(user_input):
         return get_joke()
@@ -288,9 +329,9 @@ def show_help():
     print()
     print("  hora             - Que hora es")
     print("  fecha            - Que dia es hoy")
-    print("  clima            - Como esta el dia")
+    print("  clima            - Clima de tu ciudad")
+    print("  clima Panama     - Clima de una ciudad")
     print("  chiste           - Escuchar un chiste")
-    print("  clima            - Clima del dia")
     print("  adivinanza       - Jugar a adivinar")
     print("  calculadora      - Ej: 'cuanto es 25 * 4'")
     print()

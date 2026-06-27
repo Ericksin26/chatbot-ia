@@ -1,0 +1,30 @@
+{
+  "ultima_sesion": "2026-06-26T21:21:49.118610",
+  "total_mensajes": 6,
+  "conversacion": [
+    {
+      "user": "hola",
+      "assistant": "¡Hola! ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre Python, IA, programación, matemáticas, o pedirme la hora, el clima, chistes, adivinanzas y más."
+    },
+    {
+      "user": "chiste",
+      "assistant": "Aquí va un chiste:\n¿Como se dice 'policia' en chino? \n- Ching-chong-ley."
+    },
+    {
+      "user": "hora",
+      "assistant": "Son las 21:19 (hora local)."
+    },
+    {
+      "user": "dia",
+      "assistant": "Deep Learning: redes neuronales con muchas capas. Tecnologia detras de autos autonomos, reconocimiento facial y ChatGPT."
+    },
+    {
+      "user": "calculo",
+      "assistant": "Algebra lineal: esencial para redes neuronales. Datos como vectores y matrices."
+    },
+    {
+      "user": "python main.pysa",
+      "assistant": "Python es un lenguaje de programacion interpretado, de alto nivel y multiplataforma. Creado por Guido van Rossum en 1991. Usado en IA, ciencia de datos, desarrollo web y automatizacion."
+    }
+  ]
+}

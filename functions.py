@@ -65,6 +65,37 @@ def is_weather_query(text: str) -> bool:
     return any(k in text for k in keywords)
 
 
+def detect_city(text: str) -> str:
+    text = text.lower()
+    cities = {
+        "panama": ["panama", "panamá", "ciudad de panama", "ciudad de panamá"],
+        "bogota": ["bogota", "bogotá"],
+        "medellin": ["medellin", "medellín"],
+        "caracas": ["caracas"],
+        "lima": ["lima"],
+        "buenos aires": ["buenos aires", "bs as"],
+        "mexico": ["mexico", "méxico", "cdmx", "ciudad de mexico"],
+        "madrid": ["madrid"],
+        "barcelona": ["barcelona"],
+        "santiago": ["santiago"],
+        "montevideo": ["montevideo"],
+        "quito": ["quito"],
+        "la paz": ["la paz"],
+        "san jose": ["san jose", "san josé"],
+        "managua": ["managua"],
+        "san salvador": ["san salvador"],
+        "guatemala": ["guatemala"],
+        "tegucigalpa": ["tegucigalpa"],
+        "santo domingo": ["santo domingo"],
+        "habana": ["habana", "la habana"],
+        "san juan": ["san juan"],
+    }
+    for city, keywords in cities.items():
+        if any(k in text for k in keywords):
+            return city
+    return None
+
+
 def is_time_query(text: str) -> bool:
     text = text.lower().strip()
     keywords = ("hora", "que hora es", "qué hora es", "hora actual", "reloj")
