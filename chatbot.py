@@ -62,7 +62,7 @@ def show_help():
 
 def chat():
     print("=" * 50)
-    print("  🤖 CHATBOT IA - Asistente Virtual")
+    print("  CHATBOT IA - Asistente Virtual")
     print("=" * 50)
     print("  Escribe 'ayuda' para ver comandos")
     print("  Escribe 'salir' para terminar")
@@ -70,9 +70,9 @@ def chat():
 
     client = create_client()
     if client:
-        print("  ✅ Modo: OpenAI API")
+        print("  [OK] Modo: OpenAI API")
     else:
-        print("  ⚠️  Modo: Local (sin API key)")
+        print("  [!] Modo: Local (sin API key)")
     print("-" * 50)
 
     history = []
@@ -88,7 +88,7 @@ def chat():
             user_input = clean_text(user_input)
 
             if is_exit_command(user_input):
-                print("Chatbot: ¡Gracias por conversar! Hasta luego. 👋")
+                print("Chatbot: ¡Gracias por conversar! Hasta luego.")
                 break
 
             if is_help_command(user_input):
